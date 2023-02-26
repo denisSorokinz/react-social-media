@@ -6,19 +6,20 @@ import { Request, Response } from "express";
 /* REGISTER USER */
 export const register = async (req: Request, res: Response) => {
   console.log("post");
-  
+
   try {
     console.log(1);
-    
+
     const salt = await bcrypt.genSalt();
     console.log(2, req.body);
-    
+
     const passwordHash = await bcrypt.hash(req.body.password, salt);
     console.log(3);
 
     const newUser = new User({
       ...req.body,
       password: passwordHash,
+      friends: [],
       viewedProfile: Math.floor(Math.random() * 10000),
       impressions: Math.floor(Math.random() * 10000),
     });
@@ -31,10 +32,17 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+  console.log("login");
+
   try {
+    console.log("1");
+
     const { email, password } = req.body;
 
+    console.log("2", email, password);
+
     const user = await User.findOne({ email });
+    console.log("[user]", user);
 
     if (!user) return res.status(400).json({ msg: "User does not exist." });
 

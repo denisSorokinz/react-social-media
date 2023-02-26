@@ -9,16 +9,16 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import authRoutes from "./routes/auth";
-import userRoutes from "./routes/users";
-import postRoutes from "./routes/posts";
-import { register } from "./controllers/auth";
-import { createPost } from "./controllers/posts";
-import { verifyToken } from "./middlewares/auth";
+import authRoutes from "./src/routes/auth";
+import userRoutes from "./src/routes/users";
+import postRoutes from "./src/routes/posts";
+import { register } from "./src/controllers/auth";
+import { createPost } from "./src/controllers/posts";
+import { verifyToken } from "./src/middlewares/auth";
 
-import User from "./models/User";
-import Post from "./models/Post";
-import { users, posts } from "./data";
+import User from "./src/models/User";
+import Post from "./src/models/Post";
+import { users, posts } from "./src/data";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -32,7 +32,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/assets", express.static(path.join(__dirname, "/public/assets")));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -62,8 +62,8 @@ try {
 
   // await User.deleteMany(() => true);
   // await Post.deleteMany(() => true);
-  await User.insertMany(users);
-  await Post.insertMany(posts);
+  // await User.insertMany(users);
+  // await Post.insertMany(posts);
 } catch (err) {
   console.log(`connection error: ${err}`);
 }

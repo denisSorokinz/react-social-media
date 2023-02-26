@@ -56,7 +56,7 @@ const Navbar = () => {
   );
 
   return (
-    <FlexBetween padding="1rem 6%" bgcolor={alt}>
+    <FlexBetween padding="1rem 5%" bgcolor={alt}>
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
@@ -119,50 +119,12 @@ const Navbar = () => {
           </Box>
 
           {/* Menu Items */}
-          <FlexBetween
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            gap="3rem"
-          >
-            <IconButton onClick={() => dispatch(toggleMode())}>
-              {theme.palette.mode === "dark" ? (
-                <DarkMode sx={{ fontSize: "25px" }} />
-              ) : (
-                <LightMode sx={{ color: darkColor, fontSize: "25px" }} />
-              )}
-            </IconButton>
-            <Message sx={{ fontSize: "25px" }} />
-            <Notifications sx={{ fontSize: "25px" }} />
-            <Help sx={{ fontSize: "25px" }} />
-            <FormControl variant="standard">
-              <Select
-                value={fullName}
-                sx={{
-                  backgroundColor: neutralLight,
-                  width: "150px",
-                  borderRadius: "0.25rem",
-                  padding: "0.25rem 1rem",
-                  "& .MuiSvgIcon-root": {
-                    width: "3rem",
-                    paddingRight: "0.25rem",
-                  },
-                  "& .Mui-select:focus": {
-                    backgroundColor: neutralLight,
-                  },
-                }}
-                input={<InputBase />}
-              >
-                <MenuItem>
-                  <Typography>{fullName}</Typography>
-                </MenuItem>
-                <MenuItem onClick={() => dispatch(loggedOut)}>
-                  <Typography>Log Out</Typography>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </FlexBetween>
+          <MenuItems
+            direction="vertical"
+            darkColor={darkColor}
+            neutralLightColor={neutralLight}
+            fullName={fullName}
+          />
         </Box>
       )}
     </FlexBetween>

@@ -24,6 +24,8 @@
       "views/*": ["src/views/*"],
       "components/*": ["src/components/*"],
       "state/*": ["src/state/*"],
+      "theme/*": ["src/theme/*"],
+      "utils": ["src/utils/index.ts"],
       "types": ["src/types/index.ts"],
     }
   },

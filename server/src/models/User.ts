@@ -6,7 +6,7 @@ export interface IUser {
   email: string;
   password: string;
   picturePath: string;
-  friends: any;
+  friends: any; // Array<IUser>
   location: string;
   occupation: string;
   viewedProfile: number;
@@ -44,7 +44,7 @@ const UserSchema = new Schema<IUser>(
     },
     friends: {
       type: Array,
-      default: [],
+      default: []
     },
     location: String,
     occupation: String,

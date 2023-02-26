@@ -72,10 +72,10 @@ const MenuItems: FC<MenuItemsProps> = ({
           }}
           input={<InputBase />}
         >
-          <MenuItem>
+          <MenuItem value={fullName}>
             <Typography>{fullName}</Typography>
           </MenuItem>
-          <MenuItem onClick={() => dispatch(loggedOut)}>
+          <MenuItem onClick={() => dispatch(loggedOut())}>
             <Typography>Log Out</Typography>
           </MenuItem>
         </Select>

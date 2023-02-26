@@ -39,15 +39,17 @@ const appSlice = createSlice({
       state.user = null;
       state.token = null;
     },
-    setFriends(
+    friendsUpdated(
       state,
-      { payload: { friends } }: PayloadAction<{ friends: Array<IUser> }>
+      { payload: friends }: PayloadAction<Array<IUser>>
     ) {
       if (!state.user) {
         console.error("No current user");
 
         return;
       }
+
+      console.log("[friendsUpdated-payload]", friends);
 
       state.user.friends = friends;
     },
@@ -57,9 +59,9 @@ const appSlice = createSlice({
     ) {
       state.posts = posts;
     },
-    postUpdated(state, { payload: { post } }: PayloadAction<{ post: IPost }>) {
-      const postToUpdateInd = state.posts.findIndex((p) => p._id === post._id);
-      state.posts[postToUpdateInd] = post;
+    postUpdated(state, { payload: { newPost } }: PayloadAction<{ newPost: IPost }>) {
+      const postToUpdateInd = state.posts.findIndex((p) => p._id === newPost._id);
+      state.posts[postToUpdateInd] = newPost;
     },
   },
 });
@@ -72,11 +74,13 @@ export const {
   toggleMode,
   loggedIn,
   loggedOut,
-  setFriends,
+  friendsUpdated,
   postsUpdated,
   postUpdated,
 } = appSlice.actions;
 
 // SELECTORS
 export const selectMode = (state: RootState) => state.app.mode;
+export const selectPosts = (state: RootState) => state.app.posts;
 export const selectUser = (state: RootState) => state.app.user;
+export const selectToken = (state: RootState) => state.app.token;

@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 /* READ */
 export const gedFeedPosts = async (req: Request, res: Response) => {
   console.log(req);
-  
+
   try {
     const posts = await Post.find();
 
@@ -33,6 +33,7 @@ export const getUserPosts = async (req: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
   try {
     const { userId, description, picturePath } = req.body;
+    console.log("[post-create]", req.body);
 
     const user = await User.findById(userId);
 
@@ -58,22 +59,20 @@ export const createPost = async (req: Request, res: Response) => {
 };
 
 /* UPDATE */
-export const likePost = async (
-  req: Request,
-  res: Response
-) => {
+export const likePost = async (req: Request, res: Response) => {
   try {
     const {
-      params: { id },
+      body: { id },
       user: { id: userId },
-    } = req as Request & { user: { id: string, iat: number } };
+    } = req as Request & { user: { id: string; iat: number } };
 
     const post = await Post.findById(id);
 
     if (!post) return res.status(404).send("Post not found");
 
-    const isLiked = post.likes.get(userId);
-    if(isLiked) post.likes.delete(userId);
+    const isLiked = post.get(userId);
+    console.log(post.likes);
+    if (isLiked) post.likes.delete(userId);
     else post.likes.set(userId, true);
 
     const newPost = await post.save();

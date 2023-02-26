@@ -9,7 +9,7 @@ interface IPost {
   userPicturePath: string;
   picturePath: string;
   likes: Map<string, boolean>;
-  comments: any;
+  comments: any; // Array<string>
 }
 
 const PostSchema = new Schema<IPost>(
@@ -40,7 +40,7 @@ const PostSchema = new Schema<IPost>(
     },
     comments: {
       type: Array,
-      default: [],
+      default: [""],
     },
   },
   { timestamps: true }

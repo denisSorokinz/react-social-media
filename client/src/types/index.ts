@@ -1,5 +1,5 @@
 export interface IUser {
-  _id: number;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -12,7 +12,7 @@ export interface IUser {
 }
 
 export interface IPost {
-  _id: number;
+  _id: string;
   userId: string;
   firstName: string;
   lastName: string;
@@ -20,6 +20,6 @@ export interface IPost {
   description: string;
   userPicturePath: string;
   picturePath: string;
-  likes: Map<string, boolean>;
+  likes: { [k: string]: string };
   comments: Array<string> | [];
 }

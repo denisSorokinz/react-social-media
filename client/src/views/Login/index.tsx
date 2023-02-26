@@ -12,7 +12,7 @@ const Login = () => {
       <Box
         width="100%"
         bgcolor={theme.palette.background.alt}
-        p="1rem 6%"
+        p="1rem 5%"
         textAlign="center"
       >
         <Typography
